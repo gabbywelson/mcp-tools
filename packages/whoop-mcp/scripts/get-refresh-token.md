@@ -15,19 +15,22 @@ This guide walks you through obtaining a refresh token for the WHOOP MCP server.
 Replace the placeholders in this URL with your actual values:
 
 ```
-https://api.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement
+https://api.prod.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery%20read:cycles%20read:sleep%20read:workout%20read:profile%20read:body_measurement%20offline&state=YOUR_RANDOM_STATE
 ```
 
 **Replace:**
 
 - `YOUR_CLIENT_ID` - Your WHOOP application's Client ID
 - `YOUR_REDIRECT_URI` - The redirect URI you configured in your WHOOP app (e.g., `http://localhost:3000/callback`)
+- `YOUR_RANDOM_STATE` - A random string of at least 8 characters for security (e.g., `abc12345` or generate one with `openssl rand -hex 16`)
 
 **Example:**
 
 ```
-https://api.whoop.com/oauth/oauth2/auth?response_type=code&client_id=abc123xyz&redirect_uri=http://localhost:3000/callback&scope=read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement
+https://api.prod.whoop.com/oauth/oauth2/auth?response_type=code&client_id=abc123xyz&redirect_uri=http://localhost:3000/callback&scope=read:recovery%20read:cycles%20read:sleep%20read:workout%20read:profile%20read:body_measurement%20offline&state=randomstate123
 ```
+
+**Note:** The `state` parameter is required for security (CSRF protection). It must be at least 8 characters long.
 
 ### Step 2: Authorize Your Application
 
@@ -53,15 +56,14 @@ Copy the value after `code=` - this is your **authorization code**.
 Use curl to exchange the authorization code for access and refresh tokens:
 
 ```bash
-curl -X POST https://api.whoop.com/oauth/token \
-  -H "Content-Type: application/json" \
-  -d '{
-    "grant_type": "authorization_code",
-    "code": "YOUR_AUTHORIZATION_CODE",
-    "client_id": "YOUR_CLIENT_ID",
-    "client_secret": "YOUR_CLIENT_SECRET",
-    "redirect_uri": "YOUR_REDIRECT_URI"
-  }'
+curl --request POST \
+  --url https://api.prod.whoop.com/oauth/oauth2/token \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'grant_type=authorization_code' \
+  --data-urlencode 'code=YOUR_AUTHORIZATION_CODE' \
+  --data-urlencode 'client_id=YOUR_CLIENT_ID' \
+  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \
+  --data-urlencode 'redirect_uri=YOUR_REDIRECT_URI'
 ```
 
 **Replace:**
@@ -81,7 +83,7 @@ The response will look like this:
   "token_type": "Bearer",
   "expires_in": 3600,
   "refresh_token": "def50200...",
-  "scope": "read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement"
+  "scope": "read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement%20offline"
 }
 ```
 
@@ -105,18 +107,14 @@ If you prefer a GUI tool:
 
 1. Create a new request
 2. Set method to POST
-3. URL: `https://api.whoop.com/oauth/token`
-4. Headers: `Content-Type: application/json`
-5. Body (raw JSON):
-   ```json
-   {
-     "grant_type": "authorization_code",
-     "code": "YOUR_AUTHORIZATION_CODE",
-     "client_id": "YOUR_CLIENT_ID",
-     "client_secret": "YOUR_CLIENT_SECRET",
-     "redirect_uri": "YOUR_REDIRECT_URI"
-   }
-   ```
+3. URL: `https://api.prod.whoop.com/oauth/oauth2/token`
+4. Headers: `Content-Type: application/x-www-form-urlencoded`
+5. Body (select "x-www-form-urlencoded"):
+   - `grant_type`: `authorization_code`
+   - `code`: `YOUR_AUTHORIZATION_CODE`
+   - `client_id`: `YOUR_CLIENT_ID`
+   - `client_secret`: `YOUR_CLIENT_SECRET`
+   - `redirect_uri`: `YOUR_REDIRECT_URI`
 6. Click Send
 7. Copy the `refresh_token` from the response
 
@@ -152,7 +150,7 @@ Make sure your authorization includes these scopes:
 - `read:sleep` - Sleep performance and stages
 - `read:workout` - Workout activities and metrics
 - `read:profile` - User profile information
-- `read:body_measurement` - Body measurements
+- `read:body_measurement%20offline` - Body measurements
 
 ## Security Notes
 

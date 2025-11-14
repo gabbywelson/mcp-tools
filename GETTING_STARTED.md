@@ -25,10 +25,12 @@ Before you can use the WHOOP MCP server, you need to obtain OAuth credentials fr
 
 You'll need to complete an OAuth flow to get a refresh token. Here's the easiest way:
 
-1. **Build the authorization URL** (replace YOUR_CLIENT_ID and YOUR_REDIRECT_URI):
+1. **Build the authorization URL** (replace YOUR_CLIENT_ID, YOUR_REDIRECT_URI, and YOUR_RANDOM_STATE):
    ```
-   https://api.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement
+   https://api.prod.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery%20read:cycles%20read:sleep%20read:workout%20read:profile%20read:body_measurement%20offline&state=YOUR_RANDOM_STATE
    ```
+   
+   **Note:** `state` must be a random string of at least 8 characters (e.g., `randomstate123`)
 
 2. **Visit the URL** in your browser and authorize the application
 
@@ -36,15 +38,14 @@ You'll need to complete an OAuth flow to get a refresh token. Here's the easiest
 
 4. **Exchange the code for tokens** using curl:
    ```bash
-   curl -X POST https://api.whoop.com/oauth/token \
-     -H "Content-Type: application/json" \
-     -d '{
-       "grant_type": "authorization_code",
-       "code": "YOUR_AUTHORIZATION_CODE",
-       "client_id": "YOUR_CLIENT_ID",
-       "client_secret": "YOUR_CLIENT_SECRET",
-       "redirect_uri": "YOUR_REDIRECT_URI"
-     }'
+   curl --request POST \
+     --url https://api.prod.whoop.com/oauth/oauth2/token \
+     --header 'Content-Type: application/x-www-form-urlencoded' \
+     --data-urlencode 'grant_type=authorization_code' \
+     --data-urlencode 'code=YOUR_AUTHORIZATION_CODE' \
+     --data-urlencode 'client_id=YOUR_CLIENT_ID' \
+     --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \
+     --data-urlencode 'redirect_uri=YOUR_REDIRECT_URI'
    ```
 
 5. **Save the refresh_token** from the response

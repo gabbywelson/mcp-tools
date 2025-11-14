@@ -34,8 +34,10 @@ You'll need to complete the OAuth authorization flow to get a refresh token:
 
 1. **Authorization URL**: Construct and visit this URL in your browser:
    ```
-   https://api.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement
+   https://api.prod.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery%20read:cycles%20read:sleep%20read:workout%20read:profile%20read:body_measurement%20offline&state=YOUR_RANDOM_STATE
    ```
+   
+   **Note:** Replace `YOUR_RANDOM_STATE` with a random string of at least 8 characters (e.g., `randomstate123`)
 
 2. **Authorize**: Log in and authorize your application
 
@@ -46,15 +48,14 @@ You'll need to complete the OAuth authorization flow to get a refresh token:
 
 4. **Exchange for Tokens**: Make a POST request to get your tokens:
    ```bash
-   curl -X POST https://api.whoop.com/oauth/token \
-     -H "Content-Type: application/json" \
-     -d '{
-       "grant_type": "authorization_code",
-       "code": "AUTHORIZATION_CODE",
-       "client_id": "YOUR_CLIENT_ID",
-       "client_secret": "YOUR_CLIENT_SECRET",
-       "redirect_uri": "YOUR_REDIRECT_URI"
-     }'
+   curl --request POST \
+     --url https://api.prod.whoop.com/oauth/oauth2/token \
+     --header 'Content-Type: application/x-www-form-urlencoded' \
+     --data-urlencode 'grant_type=authorization_code' \
+     --data-urlencode 'code=AUTHORIZATION_CODE' \
+     --data-urlencode 'client_id=YOUR_CLIENT_ID' \
+     --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \
+     --data-urlencode 'redirect_uri=YOUR_REDIRECT_URI'
    ```
 
 5. **Save Refresh Token**: The response will include a `refresh_token` - save this securely!
@@ -275,7 +276,7 @@ The following WHOOP API scopes are required:
 - `read:sleep` - Sleep performance and stages
 - `read:workout` - Workout activities and metrics
 - `read:profile` - User profile information
-- `read:body_measurement` - Body measurements
+- `read:body_measurement%20offline` - Body measurements
 
 Make sure these scopes are included when obtaining your OAuth tokens.
 

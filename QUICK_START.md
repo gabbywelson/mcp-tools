@@ -24,26 +24,27 @@ pnpm install
 
 ### Get Refresh Token
 
-1. Build this URL (replace YOUR_CLIENT_ID and YOUR_REDIRECT_URI):
+1. Build this URL (replace YOUR_CLIENT_ID, YOUR_REDIRECT_URI, and add a random state):
 
    ```
-   https://api.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement
+   https://api.prod.whoop.com/oauth/oauth2/auth?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=read:recovery%20read:cycles%20read:sleep%20read:workout%20read:profile%20read:body_measurement%20offline&state=randomstate123
    ```
+   
+   **Note:** `state` must be at least 8 characters for security
 
 2. Visit the URL, authorize, and copy the `code` from the redirect
 
 3. Exchange for tokens:
 
    ```bash
-   curl -X POST https://api.whoop.com/oauth/token \
-     -H "Content-Type: application/json" \
-     -d '{
-       "grant_type": "authorization_code",
-       "code": "YOUR_CODE",
-       "client_id": "YOUR_CLIENT_ID",
-       "client_secret": "YOUR_CLIENT_SECRET",
-       "redirect_uri": "YOUR_REDIRECT_URI"
-     }'
+   curl --request POST \
+     --url https://api.prod.whoop.com/oauth/oauth2/token \
+     --header 'Content-Type: application/x-www-form-urlencoded' \
+     --data-urlencode 'grant_type=authorization_code' \
+     --data-urlencode 'code=YOUR_CODE' \
+     --data-urlencode 'client_id=YOUR_CLIENT_ID' \
+     --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \
+     --data-urlencode 'redirect_uri=YOUR_REDIRECT_URI'
    ```
 
 4. Save the `refresh_token` from the response

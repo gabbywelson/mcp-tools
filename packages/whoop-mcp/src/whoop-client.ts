@@ -21,8 +21,8 @@ export class WhoopClient {
   private accessToken: string | null = null;
   private tokenExpiresAt = 0;
   private axiosInstance: AxiosInstance;
-  private readonly baseURL = "https://api.whoop.com/developer";
-  private readonly authURL = "https://api.whoop.com/oauth/token";
+  private readonly baseURL = "https://api.prod.whoop.com/developer";
+  private readonly authURL = "https://api.prod.whoop.com/oauth/oauth2/token";
 
   constructor(config: WhoopConfig) {
     this.clientId = config.clientId;
