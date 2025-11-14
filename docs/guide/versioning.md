@@ -1,329 +1,218 @@
-# Using Changesets
+# Versioning
 
-::: tip
-The [Changelog](/changelog) is automatically updated from changesets when you run `pnpm version`!
-:::
+This project follows [Semantic Versioning](https://semver.org/) (SemVer) principles.
 
-This project uses [Changesets](https://github.com/changesets/changesets) to manage versioning and changelogs in our monorepo.
+## Semantic Versioning
 
-## What is Changesets?
+Version numbers follow the format: `MAJOR.MINOR.PATCH`
 
-Changesets is a tool that helps us:
-- 📝 Document changes in a structured way
-- 🔢 Automatically version packages based on changes
-- 📋 Generate changelogs automatically
-- 🚀 Coordinate releases across multiple packages
+- **MAJOR** (X.0.0) - Breaking changes that require user action
+- **MINOR** (0.X.0) - New features, backwards compatible
+- **PATCH** (0.0.X) - Bug fixes, minor improvements
 
-## Workflow
-
-### 1. Make Your Changes
-
-Work on your feature/fix as normal:
-
-```bash
-# Make code changes
-git checkout -b feature/my-new-feature
-# ... edit files ...
-```
-
-### 2. Add a Changeset
-
-Before committing, create a changeset to document your changes:
-
-```bash
-pnpm changeset
-```
-
-This will prompt you with:
-
-**Which packages would you like to include?**
-- Select the packages your changes affect (e.g., `@mcp-tools/whoop-mcp`)
-- Use space to select, enter to confirm
-
-**What kind of change is this?**
-- **patch** (0.0.X) - Bug fixes, minor tweaks
-- **minor** (0.X.0) - New features, backwards compatible
-- **major** (X.0.0) - Breaking changes
-
-**Summary**
-- Write a brief description of your change
-- This will appear in the changelog
-
-Example:
-```
-🦋  Which packages would you like to include? 
-◉ @mcp-tools/whoop-mcp
-
-🦋  What kind of change is this for @mcp-tools/whoop-mcp? 
-❯ patch
-
-🦋  Please enter a summary for this change:
-Fix OAuth token refresh logic to handle expired tokens correctly
-```
-
-This creates a file in `.changeset/` like `.changeset/funny-pandas-jump.md`:
-
-```md
----
-"@mcp-tools/whoop-mcp": patch
----
-
-Fix OAuth token refresh logic to handle expired tokens correctly
-```
-
-### 3. Commit Everything
-
-Commit both your code changes AND the changeset file:
-
-```bash
-git add .
-git commit -m "fix: handle expired OAuth tokens"
-git push
-```
-
-### 4. Create Pull Request
-
-Create a PR as normal. The changeset file will be reviewed along with your code.
-
-## Releasing (Maintainers Only)
-
-When ready to release:
-
-### 1. Version Packages
-
-```bash
-pnpm version
-```
-
-This will:
-- Consume all changesets in `.changeset/`
-- Update package versions in `package.json`
-- Update `CHANGELOG.md` files
-- Delete the consumed changeset files
-
-Review the changes:
-```bash
-git diff
-```
-
-Commit the version changes:
-```bash
-git add .
-git commit -m "chore: version packages"
-git push
-```
-
-### 2. Publish Packages
-
-```bash
-pnpm release
-```
-
-This will:
-- Build all packages
-- Publish to npm (if configured)
-- Create git tags
-
-### 3. Create GitHub Release
-
-After publishing, create a GitHub release:
-- Tag: `@mcp-tools/whoop-mcp@1.2.3`
-- Title: `@mcp-tools/whoop-mcp v1.2.3`
-- Description: Copy from CHANGELOG.md
-
-## Examples
-
-### Example 1: Bug Fix
-
-```bash
-# Make your fix
-# ...
-
-pnpm changeset
-# Select: @mcp-tools/whoop-mcp
-# Type: patch
-# Summary: "Fix token expiration check"
-
-git add .
-git commit -m "fix: token expiration check"
-```
-
-### Example 2: New Feature
-
-```bash
-# Add new feature
-# ...
-
-pnpm changeset
-# Select: @mcp-tools/whoop-mcp
-# Type: minor
-# Summary: "Add support for workout heart rate zones"
-
-git add .
-git commit -m "feat: add workout heart rate zones"
-```
-
-### Example 3: Breaking Change
-
-```bash
-# Make breaking change
-# ...
-
-pnpm changeset
-# Select: @mcp-tools/whoop-mcp
-# Type: major
-# Summary: "BREAKING: Change config format to use T3 Env"
-
-git add .
-git commit -m "feat!: migrate to T3 Env config"
-```
-
-## Multiple Changesets
-
-You can add multiple changesets in one PR if you have multiple logical changes:
-
-```bash
-# Add first changeset
-pnpm changeset
-# Summary: "Add new sleep analysis tool"
-
-# Add second changeset
-pnpm changeset
-# Summary: "Fix recovery score calculation"
-
-# Commit all changesets
-git add .changeset/
-git commit -m "feat: sleep analysis and recovery fix"
-```
-
-## Changeset Commands
-
-```bash
-# Add a new changeset
-pnpm changeset
-
-# Add a changeset (alias)
-pnpm changeset add
-
-# Check status of changesets
-pnpm changeset status
-
-# Version packages (consumes changesets)
-pnpm version
-
-# Publish packages
-pnpm release
-```
-
-## Configuration
-
-Changesets is configured in `.changeset/config.json`:
-
-```json
-{
-  "changelog": "@changesets/cli/changelog",
-  "commit": false,
-  "access": "public",
-  "baseBranch": "main",
-  "updateInternalDependencies": "patch"
-}
-```
-
-Key settings:
-- `access: "public"` - Packages are public on npm
-- `commit: false` - We manually commit version changes
-- `baseBranch: "main"` - Compare against main branch
-- `updateInternalDependencies: "patch"` - Bump internal deps as patches
-
-## Benefits
+## Version Workflow
 
 ### For Contributors
-- ✅ Clear documentation of what changed
-- ✅ Automatic changelog generation
-- ✅ No need to manually update versions
-- ✅ Semantic versioning enforced
+
+When making changes, document them clearly in your pull request description:
+
+1. **Describe your changes** - What did you add, fix, or change?
+2. **Indicate the type** - Is it a bug fix, new feature, or breaking change?
+3. **Update documentation** - Keep READMEs and docs in sync
 
 ### For Maintainers
-- ✅ One command to version all packages
-- ✅ Coordinated releases across packages
-- ✅ Professional changelogs
-- ✅ Git tags automatically created
 
-### For Users
-- ✅ Clear release notes
-- ✅ Semantic versioning
-- ✅ Easy to see what changed
-- ✅ Breaking changes clearly marked
+When ready to release a new version:
 
-## Tips
+#### 1. Update Version Numbers
 
-### Good Changeset Summaries
+Update the version in the affected package's `package.json`:
 
-**Good** ✅
-```
-Add support for WHOOP 4.0 healthspan data
-Fix token refresh race condition
-BREAKING: Rename config.loadConfig() to config.load()
+```bash
+cd packages/whoop-mcp
+# Edit package.json version field
 ```
 
-**Bad** ❌
-```
-Update code
-Fix bug
-Changes
+#### 2. Document Changes
+
+Update the package README with notable changes:
+
+```markdown
+## Recent Changes
+
+### v1.2.0 (2024-11-14)
+- Added new healthspan analysis tool
+- Fixed token refresh race condition
+- Improved error messages
 ```
 
-### When to Skip Changesets
+#### 3. Commit and Tag
 
-You don't need a changeset for:
+```bash
+git add .
+git commit -m "chore: release @mcp-tools/whoop-mcp@1.2.0"
+git tag @mcp-tools/whoop-mcp@1.2.0
+git push origin main --tags
+```
+
+#### 4. Publish (Optional)
+
+If publishing to npm:
+
+```bash
+cd packages/whoop-mcp
+pnpm build
+npm publish
+```
+
+## Version Types
+
+### Patch Release (0.0.X)
+
+**When to use:**
+- Bug fixes
 - Documentation updates
-- Test changes
-- Internal refactoring (no API changes)
-- CI/CD configuration
-- Development tooling
+- Internal refactoring
+- Performance improvements (no API changes)
 
-For these, just commit normally without a changeset.
-
-### Changeset File Names
-
-Changesets auto-generates fun names like:
-- `funny-pandas-jump.md`
-- `brave-lions-sing.md`
-- `tiny-cats-dance.md`
-
-These are just identifiers - the content is what matters!
-
-## Troubleshooting
-
-### "No changesets present"
-
-You forgot to add a changeset. Run:
+**Example:**
 ```bash
-pnpm changeset
+# Before: 1.2.3
+# After:  1.2.4
 ```
 
-### "Changeset already exists"
+### Minor Release (0.X.0)
 
-You've already added a changeset. Either:
-- Edit the existing changeset file
-- Add another changeset for a different change
+**When to use:**
+- New features
+- New tools or functionality
+- Backwards-compatible API additions
+- Deprecations (with backwards compatibility)
 
-### "Version conflict"
-
-Someone else released while you were working. Rebase:
+**Example:**
 ```bash
-git pull --rebase origin main
+# Before: 1.2.3
+# After:  1.3.0
+```
+
+### Major Release (X.0.0)
+
+**When to use:**
+- Breaking API changes
+- Removed functionality
+- Changed behavior that breaks existing code
+- Major architectural changes
+
+**Example:**
+```bash
+# Before: 1.2.3
+# After:  2.0.0
+```
+
+## Best Practices
+
+### Clear Communication
+
+When releasing, clearly communicate:
+- What changed
+- Why it changed
+- How users should update (if breaking)
+
+### Git Tags
+
+Use descriptive tags:
+```bash
+# Good
+@mcp-tools/whoop-mcp@1.2.0
+
+# Also acceptable for monorepo releases
+v1.2.0
+```
+
+### Changelog Format
+
+Keep a simple changelog in package READMEs:
+
+```markdown
+## Changelog
+
+### v1.3.0 (2024-11-14)
+**New Features:**
+- Added healthspan analysis tool
+- Support for workout heart rate zones
+
+**Bug Fixes:**
+- Fixed token refresh timing issue
+
+**Documentation:**
+- Updated OAuth setup guide
+
+### v1.2.1 (2024-11-10)
+**Bug Fixes:**
+- Fixed error handling in recovery tool
+```
+
+## Release Checklist
+
+Before releasing:
+
+- [ ] All tests pass (`pnpm test:run`)
+- [ ] Code is formatted and linted (`pnpm check`)
+- [ ] Documentation is updated
+- [ ] Version number is updated in `package.json`
+- [ ] Changes are documented in README
+- [ ] Git tag is created
+- [ ] Changes are pushed to GitHub
+
+## Multiple Packages
+
+When releasing multiple packages:
+
+1. Update each package version independently
+2. Tag each package separately
+3. Document changes in each package's README
+
+```bash
+# Release whoop-mcp
+git tag @mcp-tools/whoop-mcp@1.2.0
+
+# Release ynab-mcp
+git tag @mcp-tools/ynab-mcp@1.0.0
+
+# Push all tags
+git push origin --tags
+```
+
+## Pre-releases
+
+For testing before official release:
+
+```bash
+# Alpha release
+1.3.0-alpha.1
+
+# Beta release
+1.3.0-beta.1
+
+# Release candidate
+1.3.0-rc.1
+```
+
+Example:
+```bash
+# Update package.json to 1.3.0-beta.1
+git tag @mcp-tools/whoop-mcp@1.3.0-beta.1
+npm publish --tag beta
 ```
 
 ## Resources
 
-- [Changesets Documentation](https://github.com/changesets/changesets)
 - [Semantic Versioning](https://semver.org/)
 - [Conventional Commits](https://www.conventionalcommits.org/)
+- [Keep a Changelog](https://keepachangelog.com/)
 
 ## Questions?
 
-- Check `.changeset/README.md` for quick reference
+- Check existing releases for examples
 - Ask in PR comments
-- See examples in past PRs
-
+- See [Contributing Guide](/reference/contributing)

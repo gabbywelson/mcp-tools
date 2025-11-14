@@ -17,19 +17,6 @@ Runs on every push and pull request to ensure code quality.
 
 **Status**: ![CI](https://github.com/gabbywelson/mcp-tools/workflows/CI/badge.svg)
 
-### 📦 Release Workflow
-
-Automates versioning and publishing using Changesets.
-
-**What it does:**
-1. Detects pending changesets
-2. Creates a "Version Packages" PR
-3. When merged, publishes to npm
-4. Creates git tags
-5. Updates changelog
-
-**Status**: ![Release](https://github.com/gabbywelson/mcp-tools/workflows/Release/badge.svg)
-
 ### 📚 Docs Deployment
 
 Automatically deploys documentation to GitHub Pages.
@@ -68,29 +55,6 @@ pnpm docs:build
 ```
 
 ## Setup Requirements
-
-### For Releases (npm Publishing)
-
-1. **Enable GitHub Actions to create PRs**:
-   - Go to Settings → Actions → General
-   - Scroll to "Workflow permissions"
-   - Select "Read and write permissions"
-   - ✅ Check "Allow GitHub Actions to create and approve pull requests"
-   - Click Save
-
-2. **Create npm account and organization**
-
-3. **Generate npm token**:
-   - Go to https://www.npmjs.com/settings/YOUR_USERNAME/tokens
-   - Create "Automation" token
-
-4. **Add to GitHub secrets**:
-   - Go to Settings → Secrets → Actions
-   - Add `NPM_TOKEN` secret
-
-::: tip
-See [.github/RELEASE_SETUP.md](https://github.com/gabbywelson/mcp-tools/blob/main/.github/RELEASE_SETUP.md) for detailed setup instructions.
-:::
 
 ### For Docs Deployment
 
@@ -140,28 +104,6 @@ on:
 - pnpm caching
 - Coverage upload to Codecov
 - Docs artifact upload
-
-### Release Workflow (`release.yml`)
-
-```yaml
-on:
-  push:
-    branches: [main]
-```
-
-**Features:**
-- Automated with Changesets
-- Creates version PR
-- Publishes to npm
-- Creates git tags
-- Updates changelog
-
-**Process:**
-1. Developer creates changeset: `pnpm changeset`
-2. Developer commits and pushes
-3. Workflow creates "Version Packages" PR
-4. Maintainer reviews and merges PR
-5. Workflow publishes to npm automatically
 
 ### Docs Workflow (`docs.yml`)
 
@@ -219,23 +161,6 @@ Run `pnpm ci` and `pnpm test:run` locally to catch issues before pushing.
    pnpm build
    ```
 
-### Release Failing
-
-**Issue**: npm publish fails
-
-**Solutions:**
-- Verify `NPM_TOKEN` is set in GitHub secrets
-- Check token has publish permissions
-- Verify package name is available on npm
-- Check `package.json` has correct `publishConfig`
-
-**Issue**: Version PR not created
-
-**Solutions:**
-- Verify changesets exist: `ls .changeset/*.md`
-- Check changeset format is correct
-- Ensure workflow has write permissions
-
 ### Docs Not Deploying
 
 **Issue**: GitHub Pages not working
@@ -256,27 +181,19 @@ Always run checks locally before pushing:
 pnpm check && pnpm test:run && pnpm build
 ```
 
-### 2. Use Changesets
-
-Document all changes with changesets:
-
-```bash
-pnpm changeset
-```
-
-### 3. Keep CI Fast
+### 2. Keep CI Fast
 
 - Use caching (already configured)
 - Run jobs in parallel (already configured)
 - Don't commit large files
 
-### 4. Monitor Workflows
+### 3. Monitor Workflows
 
 - Check workflow status in GitHub Actions tab
 - Fix failures promptly
 - Review coverage reports
 
-### 5. Protect Main Branch
+### 4. Protect Main Branch
 
 - Require PR reviews
 - Require status checks
@@ -343,13 +260,11 @@ View coverage: https://codecov.io/gh/gabbywelson/mcp-tools
 ## Resources
 
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Changesets Action](https://github.com/changesets/action)
 - [pnpm Action](https://github.com/pnpm/action-setup)
 - [Act - Local Testing](https://github.com/nektos/act)
 
 ---
 
 ::: tip
-Your CI/CD pipeline is fully automated! Just push code and let GitHub Actions handle the rest.
+Your CI/CD pipeline ensures code quality on every push. Just push code and let GitHub Actions handle the rest!
 :::
-

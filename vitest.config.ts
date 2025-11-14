@@ -25,7 +25,6 @@ export default defineConfig({
         "**/dist/**",
         "**/*.config.*",
         "**/coverage/**",
-        "**/.changeset/**",
       ],
     },
   },

@@ -36,7 +36,6 @@ git checkout -b feature/my-new-feature
 2. **Add tests** for new functionality
 3. **Update documentation** if needed
 4. **Format and lint** your code
-5. **Add a changeset** to document your changes
 
 ### Running Tests
 
@@ -67,25 +66,19 @@ pnpm format  # Format code
 pnpm lint    # Lint and fix
 ```
 
-### Adding a Changeset
+### Documenting Changes
 
-Before committing, add a changeset to document your changes:
+In your pull request description, clearly document:
+- What you changed
+- Why you made the change
+- The type of change (bug fix, feature, breaking change)
 
-```bash
-pnpm changeset
-```
+This helps maintainers understand your contribution and determine appropriate versioning.
 
-Follow the prompts:
-1. Select the package(s) you changed
-2. Choose the version bump type (patch/minor/major)
-3. Write a summary of your changes
-
-This creates a file in `.changeset/` that will be committed with your code.
-
-**Version types:**
-- **patch** (0.0.X) - Bug fixes, small tweaks
-- **minor** (0.X.0) - New features, backwards compatible
-- **major** (X.0.0) - Breaking changes
+**Change types:**
+- **Bug fix** - Fixes an issue without changing the API
+- **Feature** - Adds new functionality, backwards compatible
+- **Breaking change** - Changes that require users to update their code
 
 See the [Versioning Guide](/guide/versioning) for details.
 
@@ -125,10 +118,9 @@ Before submitting, ensure:
 
 - [ ] Code is formatted and linted (`pnpm check`)
 - [ ] Tests pass (`pnpm test:run`)
-- [ ] Changeset is added (`pnpm changeset`)
 - [ ] Documentation is updated (if needed)
 - [ ] Commit messages follow conventions
-- [ ] PR description explains the changes
+- [ ] PR description explains the changes and change type
 
 ## Project Structure
 
@@ -413,7 +405,7 @@ Check that your `.env` file is set up correctly (for integration tests).
 ## Recognition
 
 Contributors are recognized in:
-- Release notes (via changesets)
+- Release notes and package READMEs
 - GitHub contributors page
 - Special mentions for significant contributions
 
