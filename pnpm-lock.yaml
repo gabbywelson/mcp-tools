@@ -61,6 +61,31 @@ importers:
         specifier: ^5.3.3
         version: 5.9.3
 
+  packages/ynab-mcp:
+    dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: ^0.5.0
+        version: 0.5.0
+      '@t3-oss/env-core':
+        specifier: ^0.10.1
+        version: 0.10.1(typescript@5.9.3)(zod@3.25.76)
+      axios:
+        specifier: ^1.6.2
+        version: 1.13.2
+      zod:
+        specifier: ^3.22.4
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: ^20.10.0
+        version: 20.19.25
+      tsx:
+        specifier: ^4.7.0
+        version: 4.20.6
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
 packages:
 
   '@algolia/abtesting@1.9.0':
