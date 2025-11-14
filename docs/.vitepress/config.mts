@@ -45,6 +45,10 @@ export default defineConfig({
               text: "WHOOP MCP",
               link: "/packages/whoop-mcp/",
             },
+            {
+              text: "YNAB MCP",
+              link: "/packages/ynab-mcp/",
+            },
           ],
         },
         {
@@ -69,6 +73,27 @@ export default defineConfig({
             {
               text: "Available Tools",
               link: "/packages/whoop-mcp/tools",
+            },
+          ],
+        },
+        {
+          text: "YNAB MCP",
+          items: [
+            {
+              text: "Overview",
+              link: "/packages/ynab-mcp/",
+            },
+            {
+              text: "Getting Started",
+              link: "/packages/ynab-mcp/getting-started",
+            },
+            {
+              text: "Configuration",
+              link: "/packages/ynab-mcp/configuration",
+            },
+            {
+              text: "Available Tools",
+              link: "/packages/ynab-mcp/tools",
             },
           ],
         },
