@@ -28,13 +28,14 @@ describe("Type Definitions", () => {
   describe("BodyMeasurement", () => {
     it("should accept valid body measurement object", () => {
       const measurement: BodyMeasurement = {
-        height_centimeters: 180,
-        weight_kilograms: 75,
+        user_id: 123,
+        height_meter: 1.8,
+        weight_kilogram: 75,
         max_heart_rate: 190,
       };
 
-      expect(measurement.height_centimeters).toBe(180);
-      expect(measurement.weight_kilograms).toBe(75);
+      expect(measurement.height_meter).toBe(1.8);
+      expect(measurement.weight_kilogram).toBe(75);
       expect(measurement.max_heart_rate).toBe(190);
     });
   });
@@ -46,22 +47,22 @@ describe("Type Definitions", () => {
         token_type: "bearer",
         expires_in: 3600,
         refresh_token: "test-refresh-token",
-        scope: "read:profile",
       };
 
       expect(token.access_token).toBe("test-access-token");
       expect(token.expires_in).toBe(3600);
     });
 
-    it("should accept token response without refresh_token", () => {
-      const token: Partial<TokenResponse> = {
+    it("should have required fields", () => {
+      const token: TokenResponse = {
         access_token: "test-access-token",
         token_type: "bearer",
         expires_in: 3600,
+        refresh_token: "test-refresh-token",
       };
 
-      expect(token.access_token).toBe("test-access-token");
-      expect(token.refresh_token).toBeUndefined();
+      expect(token.access_token).toBeDefined();
+      expect(token.refresh_token).toBeDefined();
     });
   });
 
@@ -69,11 +70,11 @@ describe("Type Definitions", () => {
     it("should accept paginated response with records", () => {
       const response: PaginatedResponse<Cycle> = {
         records: [],
-        next_token: null,
+        next_token: undefined,
       };
 
       expect(Array.isArray(response.records)).toBe(true);
-      expect(response.next_token).toBeNull();
+      expect(response.next_token).toBeUndefined();
     });
   });
 });

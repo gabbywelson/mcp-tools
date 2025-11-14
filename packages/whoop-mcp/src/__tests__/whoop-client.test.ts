@@ -3,22 +3,22 @@ import type { WhoopConfig } from "../config.js";
 
 describe("WhoopClient", () => {
   const mockConfig: WhoopConfig = {
-    WHOOP_CLIENT_ID: "test-client-id",
-    WHOOP_CLIENT_SECRET: "test-client-secret",
-    WHOOP_REFRESH_TOKEN: "test-refresh-token",
+    clientId: "test-client-id",
+    clientSecret: "test-client-secret",
+    refreshToken: "test-refresh-token",
   };
 
   describe("Configuration", () => {
     it("should accept valid config", () => {
-      expect(mockConfig.WHOOP_CLIENT_ID).toBe("test-client-id");
-      expect(mockConfig.WHOOP_CLIENT_SECRET).toBe("test-client-secret");
-      expect(mockConfig.WHOOP_REFRESH_TOKEN).toBe("test-refresh-token");
+      expect(mockConfig.clientId).toBe("test-client-id");
+      expect(mockConfig.clientSecret).toBe("test-client-secret");
+      expect(mockConfig.refreshToken).toBe("test-refresh-token");
     });
 
     it("should have all required config fields", () => {
-      expect(mockConfig).toHaveProperty("WHOOP_CLIENT_ID");
-      expect(mockConfig).toHaveProperty("WHOOP_CLIENT_SECRET");
-      expect(mockConfig).toHaveProperty("WHOOP_REFRESH_TOKEN");
+      expect(mockConfig).toHaveProperty("clientId");
+      expect(mockConfig).toHaveProperty("clientSecret");
+      expect(mockConfig).toHaveProperty("refreshToken");
     });
   });
 

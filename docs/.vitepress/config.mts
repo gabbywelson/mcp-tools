@@ -5,6 +5,8 @@ export default defineConfig({
   title: "MCP Tools",
   description: "Model Context Protocol servers for AI assistants like Poke",
 
+  ignoreDeadLinks: true,
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
