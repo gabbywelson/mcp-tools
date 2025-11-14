@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosError } from 'axios';
-import type { WhoopConfig } from './config.js';
+import axios, { AxiosInstance, AxiosError } from "axios";
+import type { WhoopConfig } from "./config.js";
 import type {
   TokenResponse,
   WhoopUser,
@@ -8,7 +8,7 @@ import type {
   Cycle,
   Workout,
   PaginatedResponse,
-} from './types.js';
+} from "./types.js";
 
 /**
  * WHOOP API Client with automatic OAuth token management
@@ -20,8 +20,8 @@ export class WhoopClient {
   private accessToken: string | null = null;
   private tokenExpiresAt: number = 0;
   private axiosInstance: AxiosInstance;
-  private readonly baseURL = 'https://api.whoop.com/developer';
-  private readonly authURL = 'https://api.whoop.com/oauth/token';
+  private readonly baseURL = "https://api.whoop.com/developer";
+  private readonly authURL = "https://api.whoop.com/oauth/token";
 
   constructor(config: WhoopConfig) {
     this.clientId = config.clientId;
@@ -30,7 +30,7 @@ export class WhoopClient {
     this.axiosInstance = axios.create({
       baseURL: this.baseURL,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -75,14 +75,14 @@ export class WhoopClient {
       const response = await axios.post<TokenResponse>(
         this.authURL,
         {
-          grant_type: 'refresh_token',
+          grant_type: "refresh_token",
           refresh_token: this.refreshToken,
           client_id: this.clientId,
           client_secret: this.clientSecret,
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -98,7 +98,9 @@ export class WhoopClient {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         throw new Error(
-          `Failed to refresh access token: ${error.response?.data?.error || error.message}`
+          `Failed to refresh access token: ${
+            error.response?.data?.error || error.message
+          }`
         );
       }
       throw error;
@@ -109,7 +111,9 @@ export class WhoopClient {
    * Get user profile information
    */
   async getUserProfile(): Promise<WhoopUser> {
-    const response = await this.axiosInstance.get<WhoopUser>('/v1/user/profile/basic');
+    const response = await this.axiosInstance.get<WhoopUser>(
+      "/v1/user/profile/basic"
+    );
     return response.data;
   }
 
@@ -117,20 +121,24 @@ export class WhoopClient {
    * Get recovery data for a specific cycle
    */
   async getRecovery(cycleId: number): Promise<RecoveryScore> {
-    const response = await this.axiosInstance.get<RecoveryScore>(`/v1/recovery/${cycleId}`);
+    const response = await this.axiosInstance.get<RecoveryScore>(
+      `/v1/recovery/${cycleId}`
+    );
     return response.data;
   }
 
   /**
    * Get recovery data for a date range
    */
-  async getRecoveryCollection(start: string, end: string): Promise<RecoveryScore[]> {
-    const response = await this.axiosInstance.get<PaginatedResponse<RecoveryScore>>(
-      '/v1/recovery',
-      {
-        params: { start, end },
-      }
-    );
+  async getRecoveryCollection(
+    start: string,
+    end: string
+  ): Promise<RecoveryScore[]> {
+    const response = await this.axiosInstance.get<
+      PaginatedResponse<RecoveryScore>
+    >("/v1/recovery", {
+      params: { start, end },
+    });
     return response.data.records;
   }
 
@@ -138,16 +146,43 @@ export class WhoopClient {
    * Get sleep activity by ID
    */
   async getSleep(sleepId: number): Promise<SleepActivity> {
-    const response = await this.axiosInstance.get<SleepActivity>(`/v1/activity/sleep/${sleepId}`);
+    const response = await this.axiosInstance.get<SleepActivity>(
+      `/v1/activity/sleep/${sleepId}`
+    );
     return response.data;
   }
 
   /**
    * Get sleep activities for a date range
    */
-  async getSleepCollection(start: string, end: string): Promise<SleepActivity[]> {
-    const response = await this.axiosInstance.get<PaginatedResponse<SleepActivity>>(
-      '/v1/activity/sleep',
+  async getSleepCollection(
+    start: string,
+    end: string
+  ): Promise<SleepActivity[]> {
+    const response = await this.axiosInstance.get<
+      PaginatedResponse<SleepActivity>
+    >("/v1/activity/sleep", {
+      params: { start, end },
+    });
+    return response.data.records;
+  }
+
+  /**
+   * Get cycle (strain) data by ID
+   */
+  async getCycle(cycleId: number): Promise<Cycle> {
+    const response = await this.axiosInstance.get<Cycle>(
+      `/v1/cycle/${cycleId}`
+    );
+    return response.data;
+  }
+
+  /**
+   * Get cycles for a date range
+   */
+  async getCycleCollection(start: string, end: string): Promise<Cycle[]> {
+    const response = await this.axiosInstance.get<PaginatedResponse<Cycle>>(
+      "/v1/cycle",
       {
         params: { start, end },
       }
@@ -156,28 +191,12 @@ export class WhoopClient {
   }
 
   /**
-   * Get cycle (strain) data by ID
-   */
-  async getCycle(cycleId: number): Promise<Cycle> {
-    const response = await this.axiosInstance.get<Cycle>(`/v1/cycle/${cycleId}`);
-    return response.data;
-  }
-
-  /**
-   * Get cycles for a date range
-   */
-  async getCycleCollection(start: string, end: string): Promise<Cycle[]> {
-    const response = await this.axiosInstance.get<PaginatedResponse<Cycle>>('/v1/cycle', {
-      params: { start, end },
-    });
-    return response.data.records;
-  }
-
-  /**
    * Get workout by ID
    */
   async getWorkout(workoutId: number): Promise<Workout> {
-    const response = await this.axiosInstance.get<Workout>(`/v1/activity/workout/${workoutId}`);
+    const response = await this.axiosInstance.get<Workout>(
+      `/v1/activity/workout/${workoutId}`
+    );
     return response.data;
   }
 
@@ -186,7 +205,7 @@ export class WhoopClient {
    */
   async getWorkoutCollection(start: string, end: string): Promise<Workout[]> {
     const response = await this.axiosInstance.get<PaginatedResponse<Workout>>(
-      '/v1/activity/workout',
+      "/v1/activity/workout",
       {
         params: { start, end },
       }
@@ -198,8 +217,7 @@ export class WhoopClient {
    * Get body measurements
    */
   async getBodyMeasurement(): Promise<any> {
-    const response = await this.axiosInstance.get('/v1/user/measurement/body');
+    const response = await this.axiosInstance.get("/v1/user/measurement/body");
     return response.data;
   }
 }
-

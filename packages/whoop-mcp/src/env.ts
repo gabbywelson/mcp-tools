@@ -3,7 +3,7 @@ import { z } from "zod";
 
 /**
  * Type-safe environment variable configuration using T3 Env
- * 
+ *
  * This provides runtime validation and type safety for all environment variables.
  * Variables are validated on startup, ensuring the application fails fast if
  * configuration is invalid.
@@ -18,12 +18,12 @@ export const env = createEnv({
       .string()
       .min(1, "WHOOP Client ID is required")
       .describe("OAuth Client ID from WHOOP Developer Portal"),
-    
+
     WHOOP_CLIENT_SECRET: z
       .string()
       .min(1, "WHOOP Client Secret is required")
       .describe("OAuth Client Secret from WHOOP Developer Portal"),
-    
+
     WHOOP_REFRESH_TOKEN: z
       .string()
       .min(1, "WHOOP Refresh Token is required")
@@ -46,7 +46,9 @@ export const env = createEnv({
    * Called when validation fails
    * Provides detailed error messages for missing or invalid variables
    */
-  onValidationError: (error: { flatten: () => { fieldErrors: Record<string, string[]> } }) => {
+  onValidationError: (error: {
+    flatten: () => { fieldErrors: Record<string, string[]> };
+  }) => {
     console.error("❌ Invalid environment variables:");
     console.error(error.flatten().fieldErrors);
     throw new Error("Invalid environment variables");
@@ -82,4 +84,3 @@ export const config = {
  * Type definition for WHOOP configuration
  */
 export type WhoopConfig = typeof config;
-

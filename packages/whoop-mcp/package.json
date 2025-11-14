@@ -14,7 +14,13 @@
     "start": "node dist/index.js",
     "clean": "rm -rf dist"
   },
-  "keywords": ["mcp", "whoop", "fitness", "health", "model-context-protocol"],
+  "keywords": [
+    "mcp",
+    "whoop",
+    "fitness",
+    "health",
+    "model-context-protocol"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -29,4 +35,3 @@
     "typescript": "^5.3.3"
   }
 }
-

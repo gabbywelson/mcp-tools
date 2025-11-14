@@ -1,6 +1,6 @@
 /**
  * Configuration module - re-exports from env.ts for backwards compatibility
- * 
+ *
  * This file maintains the original API while using T3 Env under the hood.
  * You can import from either './config.js' or './env.js'
  */
