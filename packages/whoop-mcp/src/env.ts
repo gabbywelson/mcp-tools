@@ -46,9 +46,7 @@ export const env = createEnv({
    * Called when validation fails
    * Provides detailed error messages for missing or invalid variables
    */
-  onValidationError: (error: {
-    flatten: () => { fieldErrors: Record<string, string[]> };
-  }) => {
+  onValidationError: (error) => {
     console.error("❌ Invalid environment variables:");
     console.error(error.flatten().fieldErrors);
     throw new Error("Invalid environment variables");
@@ -58,7 +56,7 @@ export const env = createEnv({
    * Called when server variables are accessed on the client
    * This should never happen in an MCP server, but provides safety
    */
-  onInvalidAccess: (variable: string) => {
+  onInvalidAccess: (variable) => {
     throw new Error(
       `❌ Attempted to access server-side environment variable '${variable}' on the client`
     );
