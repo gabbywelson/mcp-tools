@@ -21,11 +21,14 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Editor directories
-.vscode/
 .idea/
 *.swp
 *.swo
 *~
+
+# Keep VS Code settings for Biome
+!.vscode/settings.json
+!.vscode/extensions.json
 
 # OS files
 .DS_Store

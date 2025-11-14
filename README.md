@@ -52,6 +52,15 @@ pnpm build
 
 # Clean all build artifacts
 pnpm clean
+
+# Format code with Biome
+pnpm format
+
+# Lint and fix code with Biome
+pnpm lint
+
+# Format, lint, and organize imports
+pnpm check
 ```
 
 ## Project Structure
@@ -87,9 +96,25 @@ Deploy MCP servers to Smithery and connect them to Poke for AI-powered interacti
 
 Each MCP server can be deployed to [Smithery](https://smithery.ai) for easy integration with Poke and other services. See individual package documentation for deployment instructions.
 
+## Code Quality
+
+This project uses [Biome](https://biomejs.dev/) for fast linting and formatting:
+
+- ✅ **25x faster** than Prettier
+- ✅ **One tool** instead of ESLint + Prettier  
+- ✅ **Auto-format** on save in VS Code
+- ✅ **Consistent** code style across the project
+
+See [BIOME_SETUP.md](./BIOME_SETUP.md) for configuration details.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+Before submitting:
+1. Run `pnpm check` to format and lint your code
+2. Ensure all tests pass
+3. Follow the existing code style (enforced by Biome)
 
 ## License
 
