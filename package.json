@@ -12,12 +12,7 @@
     "check": "biome check --write .",
     "ci": "biome ci ."
   },
-  "keywords": [
-    "mcp",
-    "model-context-protocol",
-    "whoop",
-    "fitness"
-  ],
+  "keywords": ["mcp", "model-context-protocol", "whoop", "fitness"],
   "author": "",
   "license": "MIT",
   "devDependencies": {

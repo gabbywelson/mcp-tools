@@ -116,3 +116,9 @@ export interface PaginatedResponse<T> {
   next_token?: string;
 }
 
+export interface BodyMeasurement {
+  user_id: number;
+  height_meter: number;
+  weight_kilogram: number;
+  max_heart_rate: number;
+}

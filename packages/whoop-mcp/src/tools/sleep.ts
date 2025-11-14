@@ -1,21 +1,25 @@
-import type { WhoopClient } from '../whoop-client.js';
+import type { WhoopClient } from "../whoop-client.js";
 
 /**
  * Get detailed sleep analysis for a specific date
  */
 export async function getSleepAnalysis(client: WhoopClient, date?: string): Promise<string> {
   try {
-    const targetDate = date || new Date().toISOString().split('T')[0];
+    const targetDate = date || new Date().toISOString().split("T")[0];
     const startOfDay = `${targetDate}T00:00:00.000Z`;
     const endOfDay = `${targetDate}T23:59:59.999Z`;
 
     const sleeps = await client.getSleepCollection(startOfDay, endOfDay);
 
     if (sleeps.length === 0) {
-      return JSON.stringify({
-        date: targetDate,
-        message: 'No sleep data available for this date',
-      }, null, 2);
+      return JSON.stringify(
+        {
+          date: targetDate,
+          message: "No sleep data available for this date",
+        },
+        null,
+        2
+      );
     }
 
     const sleep = sleeps[0];
@@ -23,11 +27,11 @@ export async function getSleepAnalysis(client: WhoopClient, date?: string): Prom
     const sleepNeeded = sleep.score.sleep_needed;
 
     // Calculate total sleep time in hours
-    const totalSleepMinutes = (
-      stageSummary.total_light_sleep_time_milli +
-      stageSummary.total_slow_wave_sleep_time_milli +
-      stageSummary.total_rem_sleep_time_milli
-    ) / (1000 * 60);
+    const totalSleepMinutes =
+      (stageSummary.total_light_sleep_time_milli +
+        stageSummary.total_slow_wave_sleep_time_milli +
+        stageSummary.total_rem_sleep_time_milli) /
+      (1000 * 60);
 
     const totalSleepHours = totalSleepMinutes / 60;
     const totalNeededHours = sleepNeeded.baseline_milli / (1000 * 60 * 60);
@@ -64,10 +68,13 @@ export async function getSleepAnalysis(client: WhoopClient, date?: string): Prom
         inBedMinutes: Math.round(stageSummary.total_in_bed_time_milli / (1000 * 60)),
       },
       sleepNeeded: {
-        baselineHours: Math.round(sleepNeeded.baseline_milli / (1000 * 60 * 60) * 100) / 100,
-        fromSleepDebt: Math.round(sleepNeeded.need_from_sleep_debt_milli / (1000 * 60 * 60) * 100) / 100,
-        fromStrain: Math.round(sleepNeeded.need_from_recent_strain_milli / (1000 * 60 * 60) * 100) / 100,
-        fromNaps: Math.round(sleepNeeded.need_from_recent_nap_milli / (1000 * 60 * 60) * 100) / 100,
+        baselineHours: Math.round((sleepNeeded.baseline_milli / (1000 * 60 * 60)) * 100) / 100,
+        fromSleepDebt:
+          Math.round((sleepNeeded.need_from_sleep_debt_milli / (1000 * 60 * 60)) * 100) / 100,
+        fromStrain:
+          Math.round((sleepNeeded.need_from_recent_strain_milli / (1000 * 60 * 60)) * 100) / 100,
+        fromNaps:
+          Math.round((sleepNeeded.need_from_recent_nap_milli / (1000 * 60 * 60)) * 100) / 100,
       },
     };
 
@@ -79,4 +86,3 @@ export async function getSleepAnalysis(client: WhoopClient, date?: string): Prom
     throw error;
   }
 }
-

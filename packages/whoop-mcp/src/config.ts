@@ -5,7 +5,7 @@
  * You can import from either './config.js' or './env.js'
  */
 
-import { env, config as envConfig, type WhoopConfig } from "./env.js";
+import { type WhoopConfig, env, config as envConfig } from "./env.js";
 
 export { env, type WhoopConfig };
 export const config = envConfig;
