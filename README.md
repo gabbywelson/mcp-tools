@@ -1,7 +1,6 @@
 # MCP Tools
 
 [![CI](https://github.com/gabbywelson/mcp-tools/workflows/CI/badge.svg)](https://github.com/gabbywelson/mcp-tools/actions/workflows/ci.yml)
-[![Release](https://github.com/gabbywelson/mcp-tools/workflows/Release/badge.svg)](https://github.com/gabbywelson/mcp-tools/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A collection of Model Context Protocol (MCP) servers designed to integrate with Poke, Claude, and other MCP-compatible AI assistants.
@@ -150,13 +149,11 @@ pnpm docs:build        # Build for production
 
 ### Versioning
 
-Automated versioning and changelogs with [Changesets](https://github.com/changesets/changesets):
+Manual versioning using semantic versioning principles:
 
-```bash
-pnpm changeset         # Document changes
-pnpm version           # Update versions
-pnpm release           # Publish to npm
-```
+- Update version in `package.json` files
+- Document changes in package READMEs
+- Create git tags for releases
 
 ### Cursor AI Context
 
@@ -177,8 +174,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 Before submitting:
 1. Run `pnpm check` to format and lint your code
 2. Run `pnpm test:run` to ensure all tests pass
-3. Add a changeset: `pnpm changeset` (see [CHANGESETS.md](./CHANGESETS.md))
-4. Follow the existing code style (enforced by Biome)
+3. Follow the existing code style (enforced by Biome)
+4. Update documentation if needed
 
 ## License
 

@@ -17,18 +17,13 @@
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "check": "biome check --write .",
-    "ci": "biome ci .",
-    "changeset": "changeset",
-    "version": "changeset version && pnpm sync-changelog",
-    "release": "pnpm build && changeset publish",
-    "sync-changelog": "bash scripts/sync-changelog.sh"
+    "ci": "biome ci ."
   },
   "keywords": ["mcp", "model-context-protocol", "whoop", "fitness"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@changesets/cli": "^2.27.1",
     "@types/node": "^20.10.0",
     "@vitest/coverage-v8": "2.1.9",
     "@vitest/ui": "^2.1.8",

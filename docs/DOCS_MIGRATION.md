@@ -12,8 +12,6 @@ Documentation was scattered across the repository:
 mcp-tools/
 ├── BIOME_SETUP.md
 ├── BIOME_MIGRATION.md
-├── CHANGESETS.md
-├── CHANGESETS_DEMO.md
 ├── GETTING_STARTED.md
 ├── INSTALLATION.md
 ├── QUICK_START.md

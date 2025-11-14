@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## @mcp-tools/whoop-mcp
 
-### @mcp-tools/whoop-mcp
+### Current Version
 
 **New Features:**
 - Complete WHOOP MCP server with OAuth 2.0 support
@@ -14,7 +14,6 @@ All notable changes to this project will be documented in this file.
 **Developer Experience:**
 - Vitest for blazing-fast testing (10x faster than Jest)
 - Biome for lightning-fast linting and formatting (25x faster than Prettier)
-- Changesets for automated versioning and changelogs
 - VitePress for beautiful, searchable documentation
 - T3 Env for type-safe environment variable validation
 
@@ -30,11 +29,30 @@ All notable changes to this project will be documented in this file.
 - Automated code formatting and linting
 - Professional error handling and logging
 
+## @mcp-tools/ynab-mcp
+
+### Current Version
+
+**New Features:**
+- Complete YNAB MCP server with Personal Access Token authentication
+- Four MCP tools: budget summary, category activity, recent transactions, create transaction
+- Simple authentication (no OAuth flow required)
+
+**Developer Experience:**
+- Same modern tooling as whoop-mcp
+- Type-safe TypeScript throughout
+- Comprehensive test coverage
+
+**Documentation:**
+- Complete setup and configuration guides
+- Tool reference documentation
+- Integration examples
+
 ---
 
 ## How Versioning Works
 
-This project uses [Changesets](https://github.com/changesets/changesets) for version management.
+This project uses [Semantic Versioning](https://semver.org/) for version management.
 
 ### For Users
 
@@ -46,10 +64,9 @@ This project uses [Changesets](https://github.com/changesets/changesets) for ver
 
 When you make changes:
 
-1. Run `pnpm changeset` to document your changes
-2. Select the affected package(s)
-3. Choose the version bump type (patch/minor/major)
-4. Write a summary of your changes
+1. Document your changes in the PR description
+2. Indicate the type of change (patch/minor/major)
+3. Update relevant documentation
 
 See the [Versioning Guide](/guide/versioning) for details.
 
@@ -57,14 +74,13 @@ See the [Versioning Guide](/guide/versioning) for details.
 
 When maintainers are ready to release:
 
-1. `pnpm version` - Consumes changesets and updates versions
-2. `pnpm release` - Publishes to npm and creates git tags
-
-The changelog is automatically generated from changesets!
+1. Update version in `package.json`
+2. Document changes in package README
+3. Create git tag and push
+4. Publish to npm (if applicable)
 
 ---
 
 ::: tip
-This changelog is automatically updated when versions are released. Check back after each release to see what's new!
+Check individual package READMEs for detailed version history and release notes.
 :::
-

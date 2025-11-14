@@ -36,7 +36,7 @@ features:
   
   - icon: 🎨
     title: Developer Experience
-    details: Biome for linting, Changesets for versioning, VitePress for docs. Best-in-class DX.
+    details: Biome for linting, VitePress for docs, Vitest for testing. Best-in-class DX.
 ---
 
 ## Quick Start
@@ -90,7 +90,6 @@ This monorepo contains MCP servers for various services, starting with WHOOP.
 - **pnpm** - Fast, efficient package management
 - **Biome** - Lightning-fast linting and formatting
 - **Vitest** - Blazing fast unit tests
-- **Changesets** - Automated versioning and changelogs
 - **VitePress** - Beautiful documentation
 
 ### 🏗️ Monorepo Architecture
@@ -122,7 +121,7 @@ Before submitting a PR:
 
 1. Run `pnpm check` to format and lint
 2. Run `pnpm test:run` to ensure tests pass
-3. Add a changeset: `pnpm changeset`
+3. Document your changes in the PR description
 
 ## License
 

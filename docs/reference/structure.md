@@ -6,9 +6,6 @@ This document describes the organization of the MCP Tools monorepo.
 
 ```
 mcp-tools/
-├── .changeset/              # Changesets configuration
-│   ├── config.json         # Changeset settings
-│   └── README.md           # Changeset docs
 ├── .vscode/                # VS Code settings
 │   ├── settings.json       # Editor config
 │   └── extensions.json     # Recommended extensions
@@ -55,14 +52,6 @@ Centralized documentation powered by VitePress. All markdown documentation lives
 - `guide/` - User guides and tutorials
 - `packages/` - Package-specific documentation
 - `reference/` - API reference and technical docs
-
-### `/.changeset`
-
-Changesets configuration for managing versions and changelogs.
-
-**Files:**
-- `config.json` - Changeset settings
-- `*.md` - Pending changesets (added by contributors)
 
 ### `/.vscode`
 
@@ -216,7 +205,6 @@ The following are gitignored:
 Development tools used across all packages:
 
 - `@biomejs/biome` - Linting and formatting
-- `@changesets/cli` - Version management
 - `@vitest/ui` - Test UI
 - `vitest` - Test framework
 - `vitepress` - Documentation
@@ -253,9 +241,6 @@ pnpm docs:build     # Build docs site
 pnpm format         # Format code
 pnpm lint           # Lint code
 pnpm check          # Format + lint
-pnpm changeset      # Add changeset
-pnpm version        # Version packages
-pnpm release        # Publish packages
 ```
 
 ### Package Scripts
