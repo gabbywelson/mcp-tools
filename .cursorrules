@@ -8,7 +8,7 @@ This is a TypeScript monorepo for Model Context Protocol (MCP) servers, designed
 
 - **Language**: TypeScript (strict mode)
 - **Runtime**: Node.js
-- **Package Manager**: pnpm (workspace monorepo)
+- **Package Manager**: pnpm 9+ (workspace monorepo)
 - **Linter/Formatter**: Biome (replaces ESLint + Prettier)
 - **Testing**: Vitest
 - **Documentation**: VitePress

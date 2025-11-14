@@ -5,12 +5,12 @@
 Before you begin, ensure you have the following installed:
 
 - **Node.js** 18 or higher ([download](https://nodejs.org/))
-- **pnpm** 8 or higher ([installation guide](https://pnpm.io/installation))
+- **pnpm** 9 or higher ([installation guide](https://pnpm.io/installation))
 
 Check your versions:
 ```bash
 node --version  # Should be v18.0.0 or higher
-pnpm --version  # Should be 8.0.0 or higher
+pnpm --version  # Should be 9.0.0 or higher
 ```
 
 If you don't have pnpm installed:

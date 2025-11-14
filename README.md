@@ -31,7 +31,7 @@ This is a pnpm workspace monorepo. Each MCP server is in the `packages/` directo
 ### Prerequisites
 
 - Node.js 18+
-- pnpm 8+
+- pnpm 9+
 
 ### Installation
 
