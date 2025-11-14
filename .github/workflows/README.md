@@ -90,7 +90,7 @@ Deploys VitePress documentation to GitHub Pages:
 
 1. Builds VitePress documentation
 2. Deploys to GitHub Pages
-3. Available at: `https://yourusername.github.io/mcp-tools/`
+3. Available at: `https://gabbywelson.github.io/mcp-tools/`
 
 #### Setup Required
 

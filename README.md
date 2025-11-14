@@ -6,7 +6,7 @@
 
 A collection of Model Context Protocol (MCP) servers designed to integrate with Poke, Claude, and other MCP-compatible AI assistants.
 
-📚 **[View Full Documentation](https://yourusername.github.io/mcp-tools/)** | 🚀 **[Quick Start](/docs/guide/quick-start.md)** | 📦 **[Packages](/docs/packages/)**
+📚 **[View Full Documentation](https://gabbywelson.github.io/mcp-tools/)** | 🚀 **[Quick Start](/docs/guide/quick-start.md)** | 📦 **[Packages](/docs/packages/)**
 
 ## Available MCP Servers
 
