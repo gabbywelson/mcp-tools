@@ -98,7 +98,9 @@ Deploy MCP servers to Smithery and connect them to Poke for AI-powered interacti
 
 Each MCP server can be deployed to [Smithery](https://smithery.ai) for easy integration with Poke and other services. See individual package documentation for deployment instructions.
 
-## Code Quality
+## Developer Experience
+
+### Code Quality
 
 This project uses [Biome](https://biomejs.dev/) for fast linting and formatting:
 
@@ -107,7 +109,46 @@ This project uses [Biome](https://biomejs.dev/) for fast linting and formatting:
 - ✅ **Auto-format** on save in VS Code
 - ✅ **Consistent** code style across the project
 
-See [BIOME_SETUP.md](./BIOME_SETUP.md) for configuration details.
+### Testing
+
+Fast, modern testing with [Vitest](https://vitest.dev/):
+
+```bash
+pnpm test              # Watch mode
+pnpm test:ui           # Visual UI
+pnpm test:coverage     # Coverage report
+```
+
+### Documentation
+
+Beautiful, searchable docs with [VitePress](https://vitepress.dev/):
+
+```bash
+pnpm docs:dev          # Start dev server
+pnpm docs:build        # Build for production
+```
+
+### Versioning
+
+Automated versioning and changelogs with [Changesets](https://github.com/changesets/changesets):
+
+```bash
+pnpm changeset         # Document changes
+pnpm version           # Update versions
+pnpm release           # Publish to npm
+```
+
+### Cursor AI Context
+
+This project includes comprehensive Cursor AI context files in `.cursor/`:
+
+- **`.cursorrules`**: Project conventions and best practices (auto-loaded)
+- **`commands.md`**: Quick reference for all commands
+- **`architecture.md`**: System design and patterns
+- **`snippets.md`**: Copy-paste code templates
+- **`troubleshooting.md`**: Solutions to common issues
+
+[Learn more about Cursor context files](./.cursor/README.md)
 
 ## Contributing
 

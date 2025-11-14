@@ -1,0 +1,404 @@
+# MCP Tools - Cursor Rules
+
+## Project Overview
+
+This is a TypeScript monorepo for Model Context Protocol (MCP) servers, designed to integrate with AI assistants like Poke. The primary package is `@mcp-tools/whoop-mcp`, which connects to the WHOOP fitness API via OAuth 2.0.
+
+## Tech Stack
+
+- **Language**: TypeScript (strict mode)
+- **Runtime**: Node.js
+- **Package Manager**: pnpm (workspace monorepo)
+- **Linter/Formatter**: Biome (replaces ESLint + Prettier)
+- **Testing**: Vitest
+- **Documentation**: VitePress
+- **Versioning**: Changesets
+- **Environment**: T3 Env (type-safe env vars)
+
+## Project Structure
+
+```
+mcp-tools/
+├── packages/
+│   └── whoop-mcp/          # WHOOP MCP server package
+│       ├── src/
+│       │   ├── index.ts    # Main MCP server entry
+│       │   ├── config.ts   # Config loader
+│       │   ├── env.ts      # T3 Env validation
+│       │   ├── whoop-client.ts  # WHOOP API client
+│       │   ├── types.ts    # TypeScript types
+│       │   └── tools/      # MCP tool implementations
+│       ├── __tests__/      # Vitest tests
+│       └── package.json
+├── docs/                   # VitePress documentation
+│   ├── .vitepress/
+│   │   └── config.mts      # VitePress config
+│   ├── guide/              # User guides
+│   ├── packages/           # Package-specific docs
+│   ├── reference/          # Reference docs
+│   └── changelog.md        # Auto-generated changelog
+├── scripts/                # Build/automation scripts
+├── .changeset/             # Changesets for versioning
+└── package.json            # Root workspace config
+```
+
+## Commands
+
+### Development
+```bash
+pnpm dev              # Run all packages in dev mode
+pnpm build            # Build all packages
+pnpm clean            # Clean all build artifacts
+```
+
+### Testing
+```bash
+pnpm test             # Run tests in watch mode
+pnpm test:ui          # Open Vitest UI
+pnpm test:run         # Run tests once
+pnpm test:coverage    # Generate coverage report
+```
+
+### Code Quality
+```bash
+pnpm check            # Format + lint (auto-fix)
+pnpm format           # Format with Biome
+pnpm lint             # Lint with Biome
+pnpm ci               # CI checks (no auto-fix)
+```
+
+### Documentation
+```bash
+pnpm docs:dev         # Start docs dev server (http://localhost:5173)
+pnpm docs:build       # Build docs for production
+pnpm docs:preview     # Preview built docs
+```
+
+### Versioning & Release
+```bash
+pnpm changeset        # Create a changeset
+pnpm version          # Consume changesets, update versions, sync changelog
+pnpm release          # Build and publish to npm
+pnpm sync-changelog   # Manually sync changelog to docs
+```
+
+### Package-Specific
+```bash
+cd packages/whoop-mcp
+pnpm dev              # Run WHOOP MCP in dev mode
+pnpm build            # Build package
+pnpm test             # Run package tests
+```
+
+## Coding Standards
+
+### TypeScript
+- Use strict mode (enabled in `tsconfig.json`)
+- Prefer explicit types over `any`
+- Use interfaces for object shapes
+- Export types alongside implementations
+- Use `type` for unions/intersections, `interface` for objects
+
+### Code Style (Biome)
+- 2-space indentation
+- Double quotes for strings
+- Semicolons required
+- 100 character line width
+- LF line endings
+- ES5 trailing commas
+- Organized imports (auto-sorted)
+
+### File Organization
+- One main export per file
+- Group imports: external → internal → types
+- Use barrel exports (`index.ts`) for public APIs
+- Keep files under 300 lines when possible
+- Colocate tests with source (`__tests__/` directory)
+
+### Naming Conventions
+- **Files**: kebab-case (`whoop-client.ts`)
+- **Classes**: PascalCase (`WhoopClient`)
+- **Functions**: camelCase (`getRecovery`)
+- **Constants**: UPPER_SNAKE_CASE (`BASE_URL`)
+- **Types/Interfaces**: PascalCase (`WhoopUser`)
+- **Private members**: prefix with `_` or use `private`
+
+### Error Handling
+- Use try-catch for async operations
+- Provide descriptive error messages
+- Log errors with context
+- Don't swallow errors silently
+- Use custom error types when appropriate
+
+### Environment Variables
+- Define in `src/env.ts` using T3 Env
+- Validate with Zod schemas
+- Never commit `.env` files
+- Document all env vars in README
+- Use `WHOOP_` prefix for WHOOP-specific vars
+
+## MCP Server Development
+
+### Tool Structure
+```typescript
+// tools/example.ts
+import type { WhoopClient } from "../whoop-client.js";
+
+export async function getExample(
+  client: WhoopClient,
+  param?: string
+): Promise<string> {
+  // Implementation
+  const data = await client.getSomething();
+  return JSON.stringify(data, null, 2);
+}
+```
+
+### Registering Tools
+```typescript
+// index.ts
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools: [
+    {
+      name: "whoop_example",
+      description: "Get example data",
+      inputSchema: {
+        type: "object",
+        properties: {
+          param: { type: "string", description: "Optional parameter" },
+        },
+      },
+    },
+  ],
+}));
+```
+
+### WHOOP API Patterns
+- All endpoints require OAuth access token
+- Tokens auto-refresh via `WhoopClient`
+- Use pagination for list endpoints
+- Handle rate limits gracefully
+- Cache responses when appropriate
+- Base URL: `https://api.prod.whoop.com/developer`
+
+## Testing Guidelines
+
+### Test Structure
+```typescript
+import { describe, it, expect } from "vitest";
+
+describe("FeatureName", () => {
+  it("should do something", () => {
+    // Arrange
+    const input = "test";
+    
+    // Act
+    const result = doSomething(input);
+    
+    // Assert
+    expect(result).toBe("expected");
+  });
+});
+```
+
+### What to Test
+- ✅ Public API functions
+- ✅ Type validation
+- ✅ Error handling
+- ✅ Edge cases
+- ❌ Don't test external APIs directly (mock them)
+- ❌ Don't test implementation details
+
+### Mocking
+```typescript
+import { vi } from "vitest";
+
+const mockClient = {
+  getRecovery: vi.fn().mockResolvedValue({ score: 85 }),
+};
+```
+
+## Documentation
+
+### When to Update Docs
+- Adding new features → Update relevant guide + package docs
+- Changing APIs → Update reference docs
+- Bug fixes → Update troubleshooting if applicable
+- New tools → Update `packages/whoop-mcp/tools.md`
+
+### Doc Structure
+- **Guide**: How-to and getting started
+- **Packages**: Package-specific documentation
+- **Reference**: Technical reference and API docs
+
+### Writing Style
+- Use clear, concise language
+- Include code examples
+- Add warnings/tips with VitePress containers
+- Link to related docs
+- Keep examples up-to-date
+
+### VitePress Tips
+```markdown
+::: tip
+Helpful tip here
+:::
+
+::: warning
+Warning message
+:::
+
+::: danger
+Critical warning
+:::
+```
+
+## Versioning & Releases
+
+### Semantic Versioning
+- **Patch** (0.0.X): Bug fixes, docs, internal changes
+- **Minor** (0.X.0): New features, backwards compatible
+- **Major** (X.0.0): Breaking changes
+
+### Creating Changesets
+```bash
+pnpm changeset
+# Select package(s)
+# Choose version bump type
+# Write clear summary
+```
+
+### Changeset Guidelines
+- One changeset per logical change
+- Write user-facing descriptions
+- Mention breaking changes clearly
+- Link to issues/PRs if applicable
+- Use markdown formatting
+
+### Release Process
+1. Merge PRs with changesets
+2. Run `pnpm version` (auto-syncs changelog)
+3. Review generated `CHANGELOG.md` files
+4. Commit version bump
+5. Run `pnpm release` to publish
+6. Push tags and commits
+
+## Git Workflow
+
+### Branch Naming
+- `feat/feature-name` - New features
+- `fix/bug-description` - Bug fixes
+- `docs/what-changed` - Documentation
+- `chore/task-name` - Maintenance
+
+### Commit Messages
+Follow conventional commits:
+```
+feat: add healthspan analysis tool
+fix: resolve token refresh race condition
+docs: update OAuth setup guide
+chore: upgrade dependencies
+test: add coverage for recovery tool
+```
+
+### Before Committing
+```bash
+pnpm check           # Format + lint
+pnpm test:run        # Run tests
+pnpm build           # Ensure builds
+```
+
+## Common Patterns
+
+### Adding a New MCP Tool
+
+1. Create tool function in `src/tools/`
+2. Add types to `src/types.ts` if needed
+3. Register in `src/index.ts` (ListTools + CallTool)
+4. Add tests in `__tests__/`
+5. Document in `docs/packages/whoop-mcp/tools.md`
+6. Create changeset
+
+### Adding Environment Variables
+
+1. Add to `src/env.ts` with Zod validation
+2. Update `.env.example`
+3. Document in README and configuration docs
+4. Update type exports if needed
+
+### Updating Dependencies
+
+```bash
+pnpm up -r -i        # Interactive update
+pnpm test:run        # Verify tests pass
+pnpm build           # Verify builds
+# Create changeset if user-facing
+```
+
+## Troubleshooting
+
+### Build Issues
+- Check TypeScript errors: `pnpm build`
+- Verify imports use `.js` extension (ESM)
+- Check `tsconfig.json` paths
+
+### Test Issues
+- Clear coverage: `pnpm clean`
+- Check for env var validation in tests
+- Use `vi.mock()` for external dependencies
+
+### Linting Issues
+- Run `pnpm check` to auto-fix
+- Check `biome.json` for rules
+- Disable specific rules with comments if needed
+
+### MCP Server Issues
+- Check env vars are loaded: `dotenv-cli -e .env`
+- Verify OAuth tokens are valid
+- Check MCP Inspector logs
+- Test WHOOP API directly with curl
+
+## Resources
+
+- [MCP SDK Docs](https://github.com/modelcontextprotocol/sdk)
+- [WHOOP API Docs](https://developer.whoop.com)
+- [Biome Docs](https://biomejs.dev)
+- [Vitest Docs](https://vitest.dev)
+- [VitePress Docs](https://vitepress.dev)
+- [Changesets Docs](https://github.com/changesets/changesets)
+- [T3 Env Docs](https://env.t3.gg)
+
+## Best Practices
+
+1. **Always run `pnpm check` before committing**
+2. **Write tests for new features**
+3. **Create changesets for user-facing changes**
+4. **Update docs when changing APIs**
+5. **Use TypeScript strictly - avoid `any`**
+6. **Handle errors gracefully with context**
+7. **Keep functions small and focused**
+8. **Document complex logic with comments**
+9. **Use meaningful variable names**
+10. **Test edge cases and error paths**
+
+## Quick Reference
+
+### File Extensions
+- `.ts` - TypeScript source
+- `.mts` - TypeScript ESM module
+- `.test.ts` - Vitest test files
+- `.md` - Markdown documentation
+
+### Import Paths
+- Always use `.js` extension for local imports (ESM requirement)
+- Use `type` imports for types: `import type { Type } from "./file.js"`
+
+### Environment
+- Development: `.env` (gitignored)
+- Example: `.env.example` (committed)
+- Validation: `src/env.ts` (T3 Env + Zod)
+
+---
+
+**Remember**: This is a professional, production-ready monorepo. Maintain high standards for code quality, testing, and documentation!
+

@@ -1,13 +1,13 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import type {
-  WhoopUser,
   BodyMeasurement,
   Cycle,
+  PaginatedResponse,
   RecoveryScore,
   SleepActivity,
-  Workout,
   TokenResponse,
-  PaginatedResponse,
+  WhoopUser,
+  Workout,
 } from "../types.js";
 
 describe("Type Definitions", () => {
