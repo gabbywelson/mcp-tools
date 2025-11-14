@@ -70,8 +70,9 @@ WHOOP_REFRESH_TOKEN=your_refresh_token
 # Build
 pnpm build
 
-# Test with MCP Inspector
-npx @modelcontextprotocol/inspector node packages/whoop-mcp/dist/index.js
+# Test with MCP Inspector (loads .env automatically)
+cd packages/whoop-mcp
+npx --yes dotenv-cli -e .env -- npx @modelcontextprotocol/inspector node dist/index.js
 ```
 
 ## 5. Use It!

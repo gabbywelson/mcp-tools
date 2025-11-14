@@ -347,9 +347,34 @@ pnpm dev
 
 ### Testing with MCP Inspector
 
+The MCP Inspector provides a web UI for testing your MCP server.
+
+**Option 1: Using your `.env` file (recommended)**
+
 ```bash
+# Load .env and run inspector
+npx --yes dotenv-cli -e .env -- npx @modelcontextprotocol/inspector node dist/index.js
+```
+
+**Option 2: Set environment variables inline**
+
+```bash
+WHOOP_CLIENT_ID=your_id \
+WHOOP_CLIENT_SECRET=your_secret \
+WHOOP_REFRESH_TOKEN=your_token \
 npx @modelcontextprotocol/inspector node dist/index.js
 ```
+
+**Option 3: Export variables first**
+
+```bash
+export WHOOP_CLIENT_ID=your_id
+export WHOOP_CLIENT_SECRET=your_secret
+export WHOOP_REFRESH_TOKEN=your_token
+npx @modelcontextprotocol/inspector node dist/index.js
+```
+
+The inspector will open in your browser at `http://localhost:5173`
 
 ## Contributing
 

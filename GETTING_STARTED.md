@@ -81,7 +81,8 @@ pnpm dev
 The MCP Inspector provides a web UI for testing MCP servers:
 
 ```bash
-npx @modelcontextprotocol/inspector node packages/whoop-mcp/dist/index.js
+cd packages/whoop-mcp
+npx --yes dotenv-cli -e .env -- npx @modelcontextprotocol/inspector node dist/index.js
 ```
 
 ### Option 2: Use with Claude Desktop
