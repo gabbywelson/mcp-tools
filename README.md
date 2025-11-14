@@ -113,8 +113,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 Before submitting:
 1. Run `pnpm check` to format and lint your code
-2. Ensure all tests pass
-3. Follow the existing code style (enforced by Biome)
+2. Add a changeset: `pnpm changeset` (see [CHANGESETS.md](./CHANGESETS.md))
+3. Ensure all tests pass
+4. Follow the existing code style (enforced by Biome)
 
 ## License
 

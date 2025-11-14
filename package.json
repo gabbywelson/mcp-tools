@@ -10,13 +10,17 @@
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "check": "biome check --write .",
-    "ci": "biome ci ."
+    "ci": "biome ci .",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "keywords": ["mcp", "model-context-protocol", "whoop", "fitness"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@changesets/cli": "^2.27.1",
     "@types/node": "^20.10.0",
     "typescript": "^5.3.3"
   }
