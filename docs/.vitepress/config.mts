@@ -11,6 +11,7 @@ export default defineConfig({
 			{ text: "Home", link: "/" },
 			{ text: "Guide", link: "/guide/getting-started" },
 			{ text: "Packages", link: "/packages/whoop-mcp/" },
+			{ text: "Changelog", link: "/changelog" },
 		],
 
 		sidebar: {
@@ -74,6 +75,7 @@ export default defineConfig({
 					items: [
 						{ text: "Project Structure", link: "/reference/structure" },
 						{ text: "Contributing", link: "/reference/contributing" },
+						{ text: "Changelog", link: "/changelog" },
 					],
 				},
 			],

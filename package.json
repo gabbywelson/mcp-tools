@@ -19,8 +19,9 @@
     "check": "biome check --write .",
     "ci": "biome ci .",
     "changeset": "changeset",
-    "version": "changeset version",
-    "release": "pnpm build && changeset publish"
+    "version": "changeset version && pnpm sync-changelog",
+    "release": "pnpm build && changeset publish",
+    "sync-changelog": "bash scripts/sync-changelog.sh"
   },
   "keywords": ["mcp", "model-context-protocol", "whoop", "fitness"],
   "author": "",

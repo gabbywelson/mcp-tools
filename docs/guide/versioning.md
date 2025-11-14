@@ -1,5 +1,9 @@
 # Using Changesets
 
+::: tip
+The [Changelog](/changelog) is automatically updated from changesets when you run `pnpm version`!
+:::
+
 This project uses [Changesets](https://github.com/changesets/changesets) to manage versioning and changelogs in our monorepo.
 
 ## What is Changesets?
