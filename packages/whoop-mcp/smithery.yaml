@@ -1,0 +1,52 @@
+name: whoop-mcp
+version: 1.0.0
+description: MCP server for WHOOP fitness data - integrate your biometric data with Claude, Poke, and other LLMs
+author: ""
+license: MIT
+homepage: https://github.com/yourusername/mcp-tools
+repository: https://github.com/yourusername/mcp-tools
+
+config:
+  - name: clientId
+    type: string
+    description: WHOOP OAuth Client ID (obtain from WHOOP Developer Portal)
+    required: true
+    env: WHOOP_CLIENT_ID
+
+  - name: clientSecret
+    type: string
+    description: WHOOP OAuth Client Secret (obtain from WHOOP Developer Portal)
+    required: true
+    secret: true
+    env: WHOOP_CLIENT_SECRET
+
+  - name: refreshToken
+    type: string
+    description: WHOOP OAuth Refresh Token (obtain via OAuth authorization flow)
+    required: true
+    secret: true
+    env: WHOOP_REFRESH_TOKEN
+
+features:
+  - Comprehensive daily overview (recovery, strain, sleep, activities)
+  - Detailed sleep analysis with stages and performance metrics
+  - Recovery tracking with HRV, RHR, and trends
+  - Strain analysis with heart rate zones and activities
+  - Automatic OAuth token refresh
+
+tools:
+  - name: whoop_get_overview
+    description: Get comprehensive WHOOP overview data for a specific date
+
+  - name: whoop_get_sleep
+    description: Get detailed sleep analysis including performance and stages
+
+  - name: whoop_get_recovery
+    description: Get recovery analysis with HRV, RHR, and trends
+
+  - name: whoop_get_strain
+    description: Get strain analysis with activities and heart rate zones
+
+  - name: whoop_get_healthspan
+    description: Get healthspan/biological age data (if available)
+

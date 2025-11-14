@@ -1,0 +1,23 @@
+{
+  "name": "mcp-tools",
+  "version": "1.0.0",
+  "description": "Various MCP tools meant to integrate with Poke and similar services",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r dev",
+    "clean": "pnpm -r clean"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "whoop",
+    "fitness"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}
