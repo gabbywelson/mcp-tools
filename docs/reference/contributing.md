@@ -406,8 +406,8 @@ Check that your `.env` file is set up correctly (for integration tests).
 ## Getting Help
 
 - **Documentation**: Check the [docs](/guide/getting-started)
-- **Issues**: Search [existing issues](https://github.com/yourusername/mcp-tools/issues)
-- **Discussions**: Start a [discussion](https://github.com/yourusername/mcp-tools/discussions)
+- **Issues**: Search [existing issues](https://github.com/gabbywelson/mcp-tools/issues)
+- **Discussions**: Start a [discussion](https://github.com/gabbywelson/mcp-tools/discussions)
 - **Discord**: Join our community (link TBD)
 
 ## Recognition

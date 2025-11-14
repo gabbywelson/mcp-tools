@@ -30,6 +30,7 @@ export default defineConfig({
             { text: "Testing", link: "/guide/testing" },
             { text: "Linting & Formatting", link: "/guide/linting" },
             { text: "Versioning", link: "/guide/versioning" },
+            { text: "CI/CD", link: "/guide/ci-cd" },
           ],
         },
       ],
@@ -84,7 +85,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: "github",
-        link: "https://github.com/yourusername/mcp-tools",
+        link: "https://github.com/gabbywelson/mcp-tools",
       },
     ],
 
@@ -93,7 +94,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: "https://github.com/yourusername/mcp-tools/edit/main/docs/:path",
+      pattern: "https://github.com/gabbywelson/mcp-tools/edit/main/docs/:path",
       text: "Edit this page on GitHub",
     },
 

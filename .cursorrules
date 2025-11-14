@@ -51,6 +51,14 @@ pnpm build            # Build all packages
 pnpm clean            # Clean all build artifacts
 ```
 
+### CI/CD
+```bash
+# GitHub Actions workflows
+.github/workflows/ci.yml        # Test, lint, typecheck, build
+.github/workflows/release.yml   # Automated releases with Changesets
+.github/workflows/docs.yml      # Deploy docs to GitHub Pages
+```
+
 ### Testing
 ```bash
 pnpm test             # Run tests in watch mode
@@ -307,6 +315,22 @@ pnpm check           # Format + lint
 pnpm test:run        # Run tests
 pnpm build           # Ensure builds
 ```
+
+**Note**: GitHub Actions will automatically run these checks on push/PR.
+
+### CI/CD Pipeline
+
+**On Push/PR**:
+- ✅ Tests (Node 18.x, 20.x)
+- ✅ Biome lint & format check
+- ✅ TypeScript type check
+- ✅ Build verification
+- ✅ Docs build
+
+**On Main Push** (with changesets):
+- ✅ Create version PR
+- ✅ Publish to npm (when merged)
+- ✅ Deploy docs to GitHub Pages
 
 ## Common Patterns
 

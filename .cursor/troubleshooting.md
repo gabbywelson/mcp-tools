@@ -650,5 +650,5 @@ pnpm tsc --version
 
 ---
 
-**Still stuck?** Check the [GitHub Issues](https://github.com/yourusername/mcp-tools/issues) or create a new one!
+**Still stuck?** Check the [GitHub Issues](https://github.com/gabbywelson/mcp-tools/issues) or create a new one!
 

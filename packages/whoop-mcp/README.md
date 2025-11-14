@@ -66,7 +66,7 @@ You'll need to complete the OAuth authorization flow to get a refresh token:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/mcp-tools.git
+   git clone https://github.com/gabbywelson/mcp-tools.git
    cd mcp-tools
    ```
 

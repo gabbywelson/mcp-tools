@@ -1,5 +1,9 @@
 # MCP Tools
 
+[![CI](https://github.com/gabbywelson/mcp-tools/workflows/CI/badge.svg)](https://github.com/gabbywelson/mcp-tools/actions/workflows/ci.yml)
+[![Release](https://github.com/gabbywelson/mcp-tools/workflows/Release/badge.svg)](https://github.com/gabbywelson/mcp-tools/actions/workflows/release.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A collection of Model Context Protocol (MCP) servers designed to integrate with Poke, Claude, and other MCP-compatible AI assistants.
 
 📚 **[View Full Documentation](https://yourusername.github.io/mcp-tools/)** | 🚀 **[Quick Start](/docs/guide/quick-start.md)** | 📦 **[Packages](/docs/packages/)**
@@ -33,7 +37,7 @@ This is a pnpm workspace monorepo. Each MCP server is in the `packages/` directo
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mcp-tools.git
+git clone https://github.com/gabbywelson/mcp-tools.git
 cd mcp-tools
 
 # Install dependencies

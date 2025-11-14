@@ -330,5 +330,5 @@ interface SleepActivity {
 }
 ```
 
-See the [source code](https://github.com/yourusername/mcp-tools/tree/main/packages/whoop-mcp/src) for complete type definitions.
+See the [source code](https://github.com/gabbywelson/mcp-tools/tree/main/packages/whoop-mcp/src) for complete type definitions.
 

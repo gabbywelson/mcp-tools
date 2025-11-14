@@ -3,8 +3,8 @@ version: 1.0.0
 description: MCP server for WHOOP fitness data - integrate your biometric data with Claude, Poke, and other LLMs
 author: ""
 license: MIT
-homepage: https://github.com/yourusername/mcp-tools
-repository: https://github.com/yourusername/mcp-tools
+homepage: https://github.com/gabbywelson/mcp-tools
+repository: https://github.com/gabbywelson/mcp-tools
 
 config:
   - name: clientId

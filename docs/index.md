@@ -11,7 +11,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: View on GitHub
-      link: https://github.com/yourusername/mcp-tools
+      link: https://github.com/gabbywelson/mcp-tools
 
 features:
   - icon: 🏃
@@ -126,5 +126,5 @@ Before submitting a PR:
 
 ## License
 
-MIT - see [LICENSE](https://github.com/yourusername/mcp-tools/blob/main/LICENSE) for details.
+MIT - see [LICENSE](https://github.com/gabbywelson/mcp-tools/blob/main/LICENSE) for details.
 

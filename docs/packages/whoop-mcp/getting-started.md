@@ -14,7 +14,7 @@ This guide will walk you through setting up the WHOOP MCP server from scratch.
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/yourusername/mcp-tools.git
+git clone https://github.com/gabbywelson/mcp-tools.git
 cd mcp-tools
 pnpm install
 ```
