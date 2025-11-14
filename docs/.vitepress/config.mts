@@ -5,6 +5,7 @@ export default defineConfig({
   title: "MCP Tools",
   description: "Model Context Protocol servers for AI assistants like Poke",
 
+  base: "/mcp-tools/",
   ignoreDeadLinks: true,
 
   themeConfig: {
