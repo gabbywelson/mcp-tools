@@ -15,6 +15,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
       id-token: write
     
     steps:
@@ -49,6 +50,7 @@ jobs:
           publish: pnpm release
           commit: 'chore: version packages'
           title: 'chore: version packages'
+          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

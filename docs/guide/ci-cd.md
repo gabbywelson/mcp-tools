@@ -71,13 +71,26 @@ pnpm docs:build
 
 ### For Releases (npm Publishing)
 
-1. Create npm account and organization
-2. Generate npm token:
+1. **Enable GitHub Actions to create PRs**:
+   - Go to Settings → Actions → General
+   - Scroll to "Workflow permissions"
+   - Select "Read and write permissions"
+   - ✅ Check "Allow GitHub Actions to create and approve pull requests"
+   - Click Save
+
+2. **Create npm account and organization**
+
+3. **Generate npm token**:
    - Go to https://www.npmjs.com/settings/YOUR_USERNAME/tokens
    - Create "Automation" token
-3. Add to GitHub secrets:
+
+4. **Add to GitHub secrets**:
    - Go to Settings → Secrets → Actions
    - Add `NPM_TOKEN` secret
+
+::: tip
+See [.github/RELEASE_SETUP.md](https://github.com/gabbywelson/mcp-tools/blob/main/.github/RELEASE_SETUP.md) for detailed setup instructions.
+:::
 
 ### For Docs Deployment
 

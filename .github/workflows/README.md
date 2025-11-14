@@ -60,12 +60,20 @@ Automated release workflow using Changesets:
 
 #### Setup Required
 
-Add these secrets to your GitHub repository:
+**1. Enable GitHub Actions to Create PRs**:
+- Go to Settings → Actions → General
+- Scroll to "Workflow permissions"
+- Select "Read and write permissions"
+- ✅ Check "Allow GitHub Actions to create and approve pull requests"
+- Click Save
 
+**2. Add npm Token**:
 - `NPM_TOKEN`: npm authentication token for publishing
   - Get from: https://www.npmjs.com/settings/YOUR_USERNAME/tokens
   - Type: "Automation" token
   - Add to: Settings → Secrets → Actions
+
+See [RELEASE_SETUP.md](./RELEASE_SETUP.md) for detailed instructions.
 
 **Status Badge**:
 ```markdown
