@@ -24,6 +24,20 @@ Connect your WHOOP fitness tracker data to AI assistants. Get insights on recove
 
 [📖 View WHOOP MCP Documentation](./packages/whoop-mcp/README.md)
 
+### 💰 YNAB MCP Server
+
+Connect your YNAB (You Need A Budget) data to AI assistants. Get budget insights, track spending, and manage transactions.
+
+**Features:**
+
+- Budget summary with account balances and net worth
+- Category spending analysis by month
+- Recent transaction listing and filtering
+- Create new transactions programmatically
+- Simple Personal Access Token authentication (no OAuth flow)
+
+[📖 View YNAB MCP Documentation](./packages/ynab-mcp/README.md)
+
 ## Getting Started
 
 This is a pnpm workspace monorepo. Each MCP server is in the `packages/` directory.
@@ -74,7 +88,9 @@ pnpm check
 ```
 mcp-tools/
 ├── packages/
-│   └── whoop-mcp/          # WHOOP fitness tracker integration
+│   ├── whoop-mcp/          # WHOOP fitness tracker integration
+│   └── ynab-mcp/           # YNAB budget and transaction integration
+├── docs/                   # VitePress documentation
 ├── package.json            # Root workspace configuration
 ├── pnpm-workspace.yaml     # pnpm workspace definition
 └── tsconfig.json           # Base TypeScript configuration
