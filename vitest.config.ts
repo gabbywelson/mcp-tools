@@ -8,6 +8,14 @@ export default defineConfig({
 		// Global test settings
 		globals: true,
 		
+		// Use single thread pool to avoid worker issues
+		pool: "forks",
+		poolOptions: {
+			forks: {
+				singleFork: true,
+			},
+		},
+		
 		// Coverage configuration
 		coverage: {
 			provider: "v8",

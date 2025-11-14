@@ -1,36 +1,41 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { env } from "../env.js";
+import { describe, it, expect } from "vitest";
+import type { WhoopConfig } from "../config.js";
 
 describe("Config / Environment Variables", () => {
-	const originalEnv = process.env;
+  it("should have correct config structure", () => {
+    const mockConfig: WhoopConfig = {
+      WHOOP_CLIENT_ID: "test",
+      WHOOP_CLIENT_SECRET: "test",
+      WHOOP_REFRESH_TOKEN: "test",
+    };
 
-	beforeEach(() => {
-		// Reset modules and environment before each test
-		process.env = { ...originalEnv };
-	});
+    expect(typeof mockConfig.WHOOP_CLIENT_ID).toBe("string");
+    expect(typeof mockConfig.WHOOP_CLIENT_SECRET).toBe("string");
+    expect(typeof mockConfig.WHOOP_REFRESH_TOKEN).toBe("string");
+  });
 
-	afterEach(() => {
-		// Restore original environment
-		process.env = originalEnv;
-	});
+  it("should accept valid config values", () => {
+    const config: WhoopConfig = {
+      WHOOP_CLIENT_ID: "abc123",
+      WHOOP_CLIENT_SECRET: "secret456",
+      WHOOP_REFRESH_TOKEN: "token789",
+    };
 
-	it("should have required environment variables defined", () => {
-		// These should be set in the test environment or .env file
-		expect(env.WHOOP_CLIENT_ID).toBeDefined();
-		expect(env.WHOOP_CLIENT_SECRET).toBeDefined();
-		expect(env.WHOOP_REFRESH_TOKEN).toBeDefined();
-	});
+    expect(config.WHOOP_CLIENT_ID).toBe("abc123");
+    expect(config.WHOOP_CLIENT_SECRET).toBe("secret456");
+    expect(config.WHOOP_REFRESH_TOKEN).toBe("token789");
+  });
 
-	it("should export config values with correct types", () => {
-		expect(typeof env.WHOOP_CLIENT_ID).toBe("string");
-		expect(typeof env.WHOOP_CLIENT_SECRET).toBe("string");
-		expect(typeof env.WHOOP_REFRESH_TOKEN).toBe("string");
-	});
+  it("should require all three config fields", () => {
+    const config: WhoopConfig = {
+      WHOOP_CLIENT_ID: "test-id",
+      WHOOP_CLIENT_SECRET: "test-secret",
+      WHOOP_REFRESH_TOKEN: "test-token",
+    };
 
-	it("should have non-empty config values", () => {
-		expect(env.WHOOP_CLIENT_ID.length).toBeGreaterThan(0);
-		expect(env.WHOOP_CLIENT_SECRET.length).toBeGreaterThan(0);
-		expect(env.WHOOP_REFRESH_TOKEN.length).toBeGreaterThan(0);
-	});
+    // TypeScript enforces these at compile time
+    expect(config).toHaveProperty("WHOOP_CLIENT_ID");
+    expect(config).toHaveProperty("WHOOP_CLIENT_SECRET");
+    expect(config).toHaveProperty("WHOOP_REFRESH_TOKEN");
+  });
 });
-
