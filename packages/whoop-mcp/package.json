@@ -17,13 +17,7 @@
     "lint": "biome lint --write .",
     "check": "biome check --write ."
   },
-  "keywords": [
-    "mcp",
-    "whoop",
-    "fitness",
-    "health",
-    "model-context-protocol"
-  ],
+  "keywords": ["mcp", "whoop", "fitness", "health", "model-context-protocol"],
   "author": "",
   "license": "MIT",
   "dependencies": {
