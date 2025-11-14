@@ -38,7 +38,7 @@ Automatically deploys documentation to GitHub Pages.
 - Push to `main` with docs changes
 - Manual workflow dispatch
 
-**URL**: https://yourusername.github.io/mcp-tools/
+**URL**: https://gabbywelson.github.io/mcp-tools/
 
 ## Local Testing
 
@@ -338,7 +338,7 @@ Add to README:
 
 ### Codecov Dashboard
 
-View coverage: https://codecov.io/gh/yourusername/mcp-tools
+View coverage: https://codecov.io/gh/gabbywelson/mcp-tools
 
 ## Resources
 
