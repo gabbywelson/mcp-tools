@@ -74,7 +74,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       
       - name: Run Biome (lint & format check)
-        run: pnpm ci
+        run: pnpm biome ci .
       
       - name: Check for uncommitted changes
         run: |
