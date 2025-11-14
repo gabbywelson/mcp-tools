@@ -10,6 +10,7 @@ A Model Context Protocol (MCP) server for accessing WHOOP fitness data using OAu
 - **Strain Tracking** - Day strain with heart rate zones and activities
 - **Healthspan** - Biological age metrics (when available)
 - **Automatic Token Refresh** - Seamless OAuth token management
+- **Type-Safe Configuration** - Built with T3 Env for runtime validation and type safety
 
 ## Prerequisites
 
@@ -255,6 +256,17 @@ The server automatically handles OAuth authentication:
 4. Retries failed requests after token refresh
 5. Stores tokens in memory only (no persistence)
 
+### Type-Safe Configuration
+
+This project uses [T3 Env](https://env.t3.gg/) for environment variable management:
+
+- ✅ Runtime validation on startup
+- ✅ Full TypeScript type safety
+- ✅ Clear error messages for invalid config
+- ✅ Zero runtime overhead
+
+See [T3 Env Setup Documentation](./docs/T3_ENV_SETUP.md) for details.
+
 ## API Scopes Required
 
 The following WHOOP API scopes are required:
@@ -301,7 +313,8 @@ Make sure these scopes are included when obtaining your OAuth tokens.
 packages/whoop-mcp/
 ├── src/
 │   ├── index.ts           # MCP server entry point
-│   ├── config.ts          # Configuration validation
+│   ├── env.ts             # T3 Env configuration (type-safe env vars)
+│   ├── config.ts          # Configuration exports & backwards compatibility
 │   ├── types.ts           # TypeScript type definitions
 │   ├── whoop-client.ts    # WHOOP API client
 │   └── tools/             # MCP tool implementations
@@ -310,6 +323,10 @@ packages/whoop-mcp/
 │       ├── recovery.ts
 │       ├── strain.ts
 │       └── healthspan.ts
+├── docs/
+│   └── T3_ENV_SETUP.md    # T3 Env documentation
+├── scripts/
+│   └── get-refresh-token.md
 ├── package.json
 ├── tsconfig.json
 └── smithery.yaml          # Smithery deployment config

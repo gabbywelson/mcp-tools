@@ -1,41 +1,28 @@
-import { z } from "zod";
-import type { WhoopConfig } from "./types.js";
-
 /**
- * Configuration schema validation using Zod
+ * Configuration module - re-exports from env.ts for backwards compatibility
+ * 
+ * This file maintains the original API while using T3 Env under the hood.
+ * You can import from either './config.js' or './env.js'
  */
-const WhoopConfigSchema = z.object({
-  clientId: z.string().min(1, "Client ID is required"),
-  clientSecret: z.string().min(1, "Client Secret is required"),
-  refreshToken: z.string().min(1, "Refresh Token is required"),
-});
+
+import { env, config as envConfig, type WhoopConfig } from "./env.js";
+
+export { env, type WhoopConfig };
+export const config = envConfig;
 
 /**
- * Load and validate configuration from environment variables
+ * Load configuration (for backwards compatibility)
+ * Now simply returns the validated config from T3 Env
  */
 export function loadConfig(): WhoopConfig {
-  const config = {
-    clientId: process.env.WHOOP_CLIENT_ID || "",
-    clientSecret: process.env.WHOOP_CLIENT_SECRET || "",
-    refreshToken: process.env.WHOOP_REFRESH_TOKEN || "",
-  };
-
-  try {
-    return WhoopConfigSchema.parse(config);
-  } catch (error: unknown) {
-    if (error instanceof z.ZodError) {
-      const messages = error.errors
-        .map((e: z.ZodIssue) => `${e.path.join(".")}: ${e.message}`)
-        .join(", ");
-      throw new Error(`Configuration validation failed: ${messages}`);
-    }
-    throw error;
-  }
+  return config;
 }
 
 /**
- * Validate configuration object
+ * Validate configuration object (for backwards compatibility)
+ * T3 Env validates on module load, so this is now a no-op
  */
-export function validateConfig(config: unknown): WhoopConfig {
-  return WhoopConfigSchema.parse(config);
+export function validateConfig(configObj: unknown): WhoopConfig {
+  // T3 Env already validated on import
+  return configObj as WhoopConfig;
 }

@@ -2,12 +2,6 @@
  * Type definitions for WHOOP API responses
  */
 
-export interface WhoopConfig {
-  clientId: string;
-  clientSecret: string;
-  refreshToken: string;
-}
-
 export interface TokenResponse {
   access_token: string;
   refresh_token: string;

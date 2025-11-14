@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
+import type { WhoopConfig } from './config.js';
 import type {
-  WhoopConfig,
   TokenResponse,
   WhoopUser,
   RecoveryScore,
@@ -14,7 +14,9 @@ import type {
  * WHOOP API Client with automatic OAuth token management
  */
 export class WhoopClient {
-  private config: WhoopConfig;
+  private clientId: string;
+  private clientSecret: string;
+  private refreshToken: string;
   private accessToken: string | null = null;
   private tokenExpiresAt: number = 0;
   private axiosInstance: AxiosInstance;
@@ -22,7 +24,9 @@ export class WhoopClient {
   private readonly authURL = 'https://api.whoop.com/oauth/token';
 
   constructor(config: WhoopConfig) {
-    this.config = config;
+    this.clientId = config.clientId;
+    this.clientSecret = config.clientSecret;
+    this.refreshToken = config.refreshToken;
     this.axiosInstance = axios.create({
       baseURL: this.baseURL,
       headers: {
@@ -72,9 +76,9 @@ export class WhoopClient {
         this.authURL,
         {
           grant_type: 'refresh_token',
-          refresh_token: this.config.refreshToken,
-          client_id: this.config.clientId,
-          client_secret: this.config.clientSecret,
+          refresh_token: this.refreshToken,
+          client_id: this.clientId,
+          client_secret: this.clientSecret,
         },
         {
           headers: {
@@ -89,7 +93,7 @@ export class WhoopClient {
 
       // Update refresh token if a new one is provided
       if (response.data.refresh_token) {
-        this.config.refreshToken = response.data.refresh_token;
+        this.refreshToken = response.data.refresh_token;
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
